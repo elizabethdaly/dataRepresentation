@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--Declare element=book attribute=catalogue at start?-->
+<library>
+    <book catalogue="Technical">
+        <Title>Bad Science</Title>
+        <Author>Ben Goldacre</Author>
+        <ISBN-13>978-0-00728-487-0</ISBN-13>
+        <ISBN-10>000728487X</ISBN-10>
+    </book>
+    <book catalogue="Technical">
+        <Title>R for Data Science</Title>
+        <Author>Garrett Grolemund</Author>
+        <Author>Hadley Wickham</Author>
+        <ISBN-13>978-1-49191-039-9</ISBN-13>
+        <ISBN-10>1491910399</ISBN-10>
+    </book>
+    <book catalogue="Cooking">
+        <Title>Forgotten Skills of Cooking</Title>
+        <Author>Darina Allen</Author>
+        <ISBN-13>978-1-85626-788-5</ISBN-13>
+        <ISBN-10>1856267881</ISBN-10>
+    </book>
+    <book catalogue="Cooking">
+        <Title>Gordon Ramsay's Ultimate Cookery Course</Title>
+        <Author>Gordon Ramsay</Author>
+        <ISBN-13>978-1-44475-669-2</ISBN-13>
+        <ISBN-10>1444756699</ISBN-10>
+    </book>
+</library>
