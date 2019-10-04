@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>2.3</title>
+        <!-- javascript can go in head -->
+    </head>
+    <body>
+        <!--a form with default value defined-->
+        <input id="name" type="text" value="Enter name"/>
+        <br/>
+        <!--a button which runs a function when clicked-->
+        <button onclick="buttonClicked()">click me</button><br/>
+        <div id="output">output will go here</div>
+        <!--retrieve whatever is in form on button click and send it to output-->
+        <script>
+            function buttonClicked(){
+                var output= document.getElementById('name').value
+                document.getElementById('output').innerText = output
+            }
+        </script>
+        
+    </body>
+</html>
