@@ -1,0 +1,91 @@
+<!--Data Representation lab02-->
+<!--carviwer_wk2.html-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>View Cars</title>
+        <!--Include BootstrapCSS only, spreads content more across width of page-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <h1>Cars</h1>
+        <!--the Cars section-->
+        <div>
+        <!--give Create button id-->
+        <button id="showCreateButton" onclick="showCreate()">Create</button>
+        </div>
+
+        <h2>All Cars</h2>
+        <!--The All Cars section-->
+        <div>
+            <!--give table id-->
+            <table class="table" id="carTable" >
+                <tr>
+                    <th>Reg</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <td>191 MO 123</td>
+                    <td>Ford</td>
+                    <td>Mondeo</td>
+                    <td>25,000</td>
+                    <td><button>update</button></td>
+                    <td><button>delete</button></td>
+                </tr>
+                <tr>
+                    <td>12 D 123</td>
+                    <td>Fiat</td>
+                    <td>Punto</td>
+                    <td>4,000</td>
+                    <td><button>update</button></td>
+                    <td><button>delete</button></td>
+                </tr>
+                <tr>
+                    <td>08 G 123</td>
+                    <td>Nissan</td>
+                    <td>Almera</td>
+                    <td>500</td>
+                    <td><button>update</button></td>
+                    <td><button>delete</button></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <h2><span id="createLable" style="color: red">Create </span> or <span id="updateLable" style="color: blue">Update </span> this Car</h2>
+        <!--The Update & Create section-->
+        <!--hide the form-->
+        <div id="createUpdateForm" style="display:none">
+            Reg <input type="text" name="reg"/> <br/>
+            Make <select name="make">
+                <option value="Ford">Ford</option>
+                <option value="Fiat">Fiat</option>
+                <option value="Nissan">Nissan</option>
+                </select><br/>
+            Model <input type="text" name="model"/> <br/>
+            Price <input type="number" name="price"/> <br/>
+
+            <!--call doCreate on button click-->
+            <span><button id="doCreateButton" onclick="doCreate()">Create</button></span>
+            <!--call doUpdate on button click-->
+            <span><button id="doUpdateButton" onclick="doUpdate()">Update</button></span>
+        </div>
+
+        <!--JaveScript-->
+        <script>
+        //function to hide Create button and table, show create & update form
+            function showCreate(){
+                document.getElementById('showCreateButton').style.display="none"
+                document.getElementById('carTable').style.display="none"
+                document.getElementById('createUpdateForm').style.display="block"
+            }
+        </script>
+    </body>
+</html>
