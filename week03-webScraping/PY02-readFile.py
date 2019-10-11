@@ -6,7 +6,7 @@ import requests
 # Import Beautiful Soup package
 from bs4 import BeautifulSoup
 
-## Open the file from week 2 lab
+# Open the file from week 2 lab
 with open("../week02/carviewer_wk2.html") as f:
     soup = BeautifulSoup(f, 'html.parser')
 
