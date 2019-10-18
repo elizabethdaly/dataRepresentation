@@ -1,0 +1,25 @@
+<!-- WK4 Data Rapresentation Lab02 -->
+<html>
+    <head>
+        <title>WK4 Lab02</title>
+    </head>
+    <body>
+        <script>
+            var jsonString = '{ "employees": [{"firstName": "John", "lastName": "Doe"}, {"firstName": "Anna", "lastName": "Smith"}, {"firstName": "Peter", "lastName": "Jones"}] }';
+            var obj = JSON.parse(jsonString);
+            var employees = obj.employees; // array
+
+            // print firstName each object
+            //for (employee of employees){  // iterate thru
+            //    console.log(employee.firstName);
+            //}
+
+            employees.forEach(employee => {
+                console.log(employee.lastName)
+            });
+
+            
+        </script>
+    </body>
+
+</html>

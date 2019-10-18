@@ -1,0 +1,25 @@
+<!-- WK4 Data Rapresentation Lab02 -->
+<html>
+    <head>
+        <title>WK4 Lab02</title>
+    </head>
+    <body>
+        <button onclick="displayJSON()">Do it</button> <!-- run fn on click-->
+        <script>
+            function displayJSON(){
+                var jsonString = '{ "employees": [{"firstName": "John", "lastName": "Doe"}, {"firstName": "Anna", "lastName": "Smith"}, {"firstName": "Peter", "lastName": "Jones"}] }';
+                var obj = JSON.parse(jsonString);
+                var employees = obj.employees; // array
+
+                employees.forEach(employee => {
+                    console.log(employee.lastName)
+                });
+
+            }
+            
+
+            
+        </script>
+    </body>
+
+</html>

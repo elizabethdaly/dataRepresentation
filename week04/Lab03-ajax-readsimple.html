@@ -1,0 +1,31 @@
+<!-- WK4 Data Rapresentation Lab02 -->
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <title>WK4 Lab03</title>
+    </head>
+    <body>
+        <button onclick="readJSON()">Do it</button> <!-- run fn on click-->
+        <script>
+            function readJSON(){
+                console.log("inside readJSON function")
+                $.ajax({
+                    "url": "https://api.coindesk.com/v1/bpi/currentprice.json",
+                    "method": "GET",
+                    "data": "",
+                    "dataType": "JSON",
+                    "success": function(result){
+                        console.log(JSON.stringify(result));
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("status:"+status+" message:"+error);
+                    }
+
+                });
+                
+            }
+            
+        </script>
+    </body>
+
+</html>
