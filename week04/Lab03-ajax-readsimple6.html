@@ -7,6 +7,7 @@
     </head>
     <body>
         <button id='doitButton', onclick="readJSON()">Do it</button> <!-- run fn on click-->
+        <div id="price"></div>
         <script>
             function readJSON(){
                 console.log("inside readJSON function")
@@ -21,8 +22,9 @@
                         var rate2 = result.bpi.GBP.rate; //pound rate
                         console.log(rate2);
 
-                        // button text changes to the rate
-                        // document.getElementById('doitButton').innerText = rate;
+                        // print rate to page
+                        document.getElementById('price').innerText = rate1;
+                        //document.getElementById('price').innerText = rate2;
                     },
                     "error": function(xhr, status,error){
                         console.log("status:"+status+" message:"+error);
