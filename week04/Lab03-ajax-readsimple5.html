@@ -6,7 +6,7 @@
         <title>WK4 Lab03</title>
     </head>
     <body>
-        <button onclick="readJSON()">Do it</button> <!-- run fn on click-->
+        <button id='doitButton', onclick="readJSON()">Do it</button> <!-- run fn on click-->
         <script>
             function readJSON(){
                 console.log("inside readJSON function")
@@ -16,16 +16,20 @@
                     "data": "",
                     "dataType": "JSON",
                     "success": function(result){
-                        console.log(JSON.stringify(result));
+                        var rate = result.bpi.EUR.rate; //euro rate
+                        console.log(rate);
+
+                        // button text changes to the rate
+                        document.getElementById('doitButton').innerText = rate;
                     },
                     "error": function(xhr, status,error){
                         console.log("status:"+status+" message:"+error);
                     }
-
+                    
                 });
                 
             }
-            
+               
         </script>
     </body>
 
