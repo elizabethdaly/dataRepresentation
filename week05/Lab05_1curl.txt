@@ -1,0 +1,49 @@
+Lab05.1 CURL
+
+1. Test CURL
+λ curl google.ie                                                              
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>                                         
+<H1>301 Moved</H1>                                                            
+The document has moved                                                        
+<A HREF="http://www.google.ie/">here</A>.                                     
+</BODY></HTML>           
+
+2. See response header
+λ curl -i google.ie
+HTTP/1.1 301 Moved Permanently
+Location: http://www.google.ie/
+Content-Type: text/html; charset=UTF-8
+Date: Fri, 25 Oct 2019 11:55:31 GMT
+Expires: Sun, 24 Nov 2019 11:55:31 GMT
+Cache-Control: public, max-age=2592000
+Server: gws
+Content-Length: 218
+X-XSS-Protection: 0
+X-Frame-Options: SAMEORIGIN
+
+3.a View all employees here
+λ curl http://dummy.restapiexample.com/api/v1/employees
+[{"id":"5672","employee_name":"yukhonthorn1","employee_salary":"50000","employee_age":"60","profile_image":""},
+{"id":"5678","employee_name":"jhuygt44rrrr","employee_salary":"123","employee_age":"23","profile_image":""},
+{"id":"5679","employee_name":"test123","employee_salary":"123","employee_age":"23","profile_image":""}, ..
+
+3.b View employee 2202
+λ curl http://dummy.restapiexample.com/api/v1/employee/2201
+Returns piles of rubbish not just single id
+
+4. Delete an employee
+λ curl -X DELETE http://dummy.restapiexample.com/api/v1/delete/1000
+{"success":{"text":"successfully! deleted Records"}}
+
+5. Create an employee (Windows)
+λ curl -i -d “{\"name\":\"jj\",\"salary\":\"123\",\"age\":\"23\"}” -H “Content-Type: application/json” -X POST http://dummy.restapiexample.com/api/v1/create
+curl: (6) Could not resolve host: application
+HTTP/1.1 200 OK
+.....
+
+6. Update an employee (Windows)
+λ curl -d “{\"name\":\"Mary\",\"salary\":\"12000\",\"age\":99}” -H “Content-Type: application/json” -X PUT http://dummy.restapiexam ple.com/api/v1/update/2202
+curl: (6) Could not resolve host: application
+curl: (6) Could not resolve host: dummy.restapiexam
+
