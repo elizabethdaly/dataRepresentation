@@ -1,0 +1,118 @@
+<!-- WK5 Data Rapresentation Lab05 -->
+<html>
+
+    <head>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <title>WK5 Lab05 Calling server with Ajax</title>
+    </head>
+
+    <body>
+        <button onclick="getAll()">getAll</button> <!-- get all cars-->
+        <button onclick="createCar()">createCar</button> <!-- create a car-->
+        <button onclick="updateCar()">updateCar</button> <!-- update a car-->
+        <button onclick="deleteCar()">deleteCar</button> <!-- update a car-->
+        
+        <div id="output"></div>
+        <table id="caesTable">
+            <tr>
+                <th>reg</th>
+                <th>make</th>
+                <th>model</th>
+                <th>price</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+    </body>
+    
+    <script>
+        function getAll(){
+            console.log("inside getAll function")
+            $.ajax({
+                "url": "http://127.0.0.1:5000/cars",
+                "method": "GET",
+                "data": "",
+                "dataType": "JSON",
+                "success": function(result){
+                    // print out all cars
+                    console.log(JSON.stringify(result));
+                    
+                    // or loop through each car in cars
+                    for (car of result.cars){
+                        console.log(JSON.stringify(car));
+                    };
+                },
+                "error": function(xhr, status,error){
+                    console.log("error:"+status+" message:"+error);
+                }
+
+            });
+                
+        }
+
+        function createCar(){
+            console.log("inside createCar fn")
+            var car = {"reg":"12 D 1234","make":"Fiat","model":"Punto","price":3000}
+            console.log(JSON.stringify(car));
+            $.ajax({
+                "url": "http://127.0.0.1:5000/cars",
+                "method": "POST",
+                "data": JSON.stringify(car),
+                "dataType": "JSON",
+                contentType: "application/json; charset=utf-8",
+                "success": function(result){
+                    console.log(result);
+                    document.getElementById("output").innerText = JSON.stringify(result);
+                },
+                "error": function(xhr, status,error){
+                    console.log("error:"+status+" message:"+error);
+                }
+
+            });
+        }  
+
+        function updateCar(){
+            console.log("inside updateCar fn")
+            var car = {"reg":"181 G 1234","make":"Ford","model":"Mondeo","price":10}
+            console.log(JSON.stringify(car));
+            $.ajax({
+                "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
+                "method": "PUT",
+                "data": JSON.stringify(car),
+                "dataType": "JSON",
+                contentType: "application/json; charset=utf-8",
+                "success": function(result){
+                    console.log(result);
+                    document.getElementById("output").innerText = JSON.stringify(result);
+                },
+                "error": function(xhr, status,error){
+                    console.log("error:"+status+" message:"+error);
+                }
+
+            });
+        }
+
+        function deleteCar(){
+            console.log("inside deleteCar fn")
+            var car = {"reg":"12 D 1234"}
+            console.log(JSON.stringify(car));
+            $.ajax({
+                "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
+                "method": "DELETE",
+                "data": "",
+                "dataType": "JSON",
+                contentType: "application/json; charset=utf-8",
+                "success": function(result){
+                    console.log(result);
+                    document.getElementById("output").innerText = JSON.stringify(result);
+                },
+                "error": function(xhr, status,error){
+                    console.log("error:"+status+" message:"+error);
+                }
+
+            });
+        }
+    </script>
+
+</html>
