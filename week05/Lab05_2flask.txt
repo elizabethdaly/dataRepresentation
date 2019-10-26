@@ -1,0 +1,99 @@
+Lab05.2 Flask
+
+restserver must be running to get back info. If it's not I get:
+λ curl -i http://localhost:5000/cars/test
+curl: (7) Failed to connect to localhost port 5000: Connection refused
+
+14.a Get all
+λ curl -i http://localhost:5000/cars 
+HTTP/1.0 200 OK                      
+Content-Type: application/json       
+Content-Length: 349                  
+Server: Werkzeug/0.15.4 Python/3.7.3 
+Date: Sat, 26 Oct 2019 11:30:40 GMT  
+                                     
+{                                    
+  "cars": [                          
+    {                                
+      "make": "Ford",                
+      "model": "Modeo",              
+      "price": 18000,                
+      "reg": "181 G 1234"            
+    },                               
+    {                                
+      "make": "Nissan",              
+      "model": "Almera",             
+      "price": 8000,                 
+      "reg": "11 MO 1234"            
+    },                               
+    {                                
+      "make": "Nissan",              
+      "model": "Almera",             
+      "price": 8000,                 
+      "reg": "test"                  
+    }                                
+  ]                                  
+}                                    
+
+14.b Find by id
+λ curl -i http://localhost:5000/cars/test 
+HTTP/1.0 200 OK                           
+Content-Type: application/json            
+Content-Length: 104                       
+Server: Werkzeug/0.15.4 Python/3.7.3      
+Date: Sat, 26 Oct 2019 11:32:45 GMT       
+                                          
+{                                         
+  "car": {                                
+    "make": "Nissan",                     
+    "model": "Almera",                    
+    "price": 8000,                        
+    "reg": "test"                         
+  }                                       
+}                                         
+
+14.c Create NNB escape all the " -> \"
+λ curl -i -H "Content-Type:application/json" -X POST -d "{\"reg\":\"12 D 1234\",\"make\":\"Fiat\",\"model\":\"Punto\",\"price\":3000}" http://localhost:5000/cars
+HTTP/1.0 201 CREATED
+Content-Type: application/json
+Content-Length: 106
+Server: Werkzeug/0.15.4 Python/3.7.3
+Date: Sat, 26 Oct 2019 11:36:25 GMT
+
+{
+  "car": {
+    "make": "Fiat",
+    "model": "Punto",
+    "price": 3000,
+    "reg": "12 D 1234"
+  }
+}
+
+14.d Update NNB escape all the " -> \"
+λ curl -i -H "Content-Type:application/json" -X PUT -d "{\"make\":\"Fiesta\"}" http://localhost:5000/cars/181%20G%201234
+HTTP/1.0 200 OK                                                                                                         
+Content-Type: application/json                                                                                          
+Content-Length: 110                                                                                                     
+Server: Werkzeug/0.15.4 Python/3.7.3                                                                                    
+Date: Sat, 26 Oct 2019 11:39:05 GMT                                                                                     
+                                                                                                                        
+{                                                                                                                       
+  "car": {                                                                                                              
+    "make": "Fiesta",                                                                                                   
+    "model": "Modeo",                                                                                                   
+    "price": 18000,                                                                                                     
+    "reg": "181 G 1234"                                                                                                 
+  }                                                                                                                     
+}  
+
+14.e Delete
+λ curl -i -X DELETE http://localhost:5000/cars/181%20G%201234
+HTTP/1.0 200 OK                                              
+Content-Type: application/json                               
+Content-Length: 21                                           
+Server: Werkzeug/0.15.4 Python/3.7.3                         
+Date: Sat, 26 Oct 2019 11:40:53 GMT                          
+                                                             
+{                                                            
+  "result": true                                             
+}                                                            

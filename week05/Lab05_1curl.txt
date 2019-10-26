@@ -29,8 +29,8 @@ X-Frame-Options: SAMEORIGIN
 {"id":"5679","employee_name":"test123","employee_salary":"123","employee_age":"23","profile_image":""}, ..
 
 3.b View employee 2202
-λ curl http://dummy.restapiexample.com/api/v1/employee/2201
-Returns piles of rubbish not just single id
+λ curl http://dummy.restapiexample.com/api/v1/employee/6000
+{"id":"6000","employee_name":"nikhil333","employee_salary":"0","employee_age":"32","profile_image":""}
 
 4. Delete an employee
 λ curl -X DELETE http://dummy.restapiexample.com/api/v1/delete/1000
@@ -40,10 +40,16 @@ Returns piles of rubbish not just single id
 λ curl -i -d “{\"name\":\"jj\",\"salary\":\"123\",\"age\":\"23\"}” -H “Content-Type: application/json” -X POST http://dummy.restapiexample.com/api/v1/create
 curl: (6) Could not resolve host: application
 HTTP/1.1 200 OK
-.....
+.....don't know if this is ok?
+
+λ curl -i -H "Content-Type:application/json" -X POST -d "{\"name\":\"toi\",\"salary\":\"1123\",\"age\":\"23\"}" http://dummy.restapiexample.com/api/v1/update/6554
+HTTP/1.1 405 Method Not Allowed
 
 6. Update an employee (Windows)
-λ curl -d “{\"name\":\"Mary\",\"salary\":\"12000\",\"age\":99}” -H “Content-Type: application/json” -X PUT http://dummy.restapiexam ple.com/api/v1/update/2202
-curl: (6) Could not resolve host: application
-curl: (6) Could not resolve host: dummy.restapiexam
+λ curl -d “{\"name\":\"Mary\",\"salary\":\"12000\",\"age\":99}” -H “Content-Type:application/json” -X PUT http://dummy.restapiexample.com/api/v1/update/6000
+{"name":null,"salary":null,"age":null}
+....don't know if this is ok?
 
+λ curl -i -H "Content-Type:application/json" -X PUT -d "{\"name\":\"moi\",\"salary\":\"1123\",\"age\":\"23\"}" http://dummy.restapiexample.com/api/v1/update/6554
+{"name":"moi","salary":"1123","age":"23"}
+..this ok
