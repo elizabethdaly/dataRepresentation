@@ -258,8 +258,8 @@
 
                 console.log("updateCar on server now - ajax PUT next line")
                 console.log(JSON.stringify(car));
-                console.log(car);
-                $.ajax({ //same
+                console.log(car); //same
+                $.ajax({
                     "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
                     "method": "PUT",
                     "data": JSON.stringify(car),
