@@ -5,10 +5,13 @@
 <html>
     <head>
         <title>View Cars</title>
+
         <!--Include BootstrapCSS only, spreads content more across width of page-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <!-- link to JQuery in here for week05 Lab5.4>
+        
+        <!--week05 Lab05.4 link to JQuery in here-->
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     </head>
 
     <body>
@@ -29,34 +32,11 @@
                     <th>Make</th>
                     <th>Model</th>
                     <th>Price</th>
-                    <th>Update</th>
-                    <th>Delete</th>
+                    <th>Update</th> <!-- update button-->
+                    <th>Delete</th> <!-- delete button-->
                 </tr>
-                <tr id ="191 MO 123"> <!--give each tr an id for part 24.b-->
-                    <td>191 MO 123</td>
-                    <td>Ford</td>
-                    <td>Mondeo</td>
-                    <td>25000</td>
-                    <td><button onclick="showUpdate(this)">update</button></td>
-                    <td><button onclick="doDelete(this)">delete</button></td> <!--part 28-->
-                </tr>
-                <tr id = "12 D 123">
-                    <td>12 D 123</td>
-                    <td>Fiat</td>
-                    <td>Punto</td>
-                    <td>4000</td>
-                    <td><button onclick="showUpdate(this)">update</button></td>
-                    <td><button onclick="doDelete(this)">delete</button></td>
-                </tr>
-                <tr id = "08 G 123">
-                    <td>08 G 123</td>
-                    <td>Nissan</td>
-                    <td>Almera</td>
-                    <td>500</td>
-                    <td><button onclick="showUpdate(this)">update</button></td>
-                    <td><button onclick="doDelete(this)">delete</button></td>
-                </tr>
-
+                <!-- blank table to start-->
+                
             </table>
         </div>
 
@@ -108,8 +88,35 @@
                 var car = getCarFromRow(rowElement)
                 populateFormWithCar(car)
             }
-            // week05 Lab05.4 Load data from server when programme starts
-            showViewAll();
+            // week05 Lab05.4 Load data from server when program starts
+            // cars are from restserver.py
+            getAll(); // call getAll()
+            function getAll(){
+                console.log("inside getAll function")
+                $.ajax({
+                    "url": "http://127.0.0.1:5000/cars",
+                    "method": "GET",
+                    "data": "",
+                    "dataType": "JSON",
+                    "success": function(result){
+                        // print out all cars
+                        // console.log(JSON.stringify(result));
+                    
+                        // or loop through each car in cars
+                        for (car of result.cars){
+                            console.log(JSON.stringify(car));
+
+                            // put each car into the table
+                            addCarToTable(car)
+                        };
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("error:"+status+" message:"+error);
+                    }
+
+                });
+                
+            }
             
             function showViewAll(){
                 //part 11 show create button and table, hide createUpdateForm
@@ -137,6 +144,7 @@
                 clearForm()
 
                 // week05 Lab05.4 Do the ajax call to create car on the server here.
+                
 
                 //part 12 to call function in part 11
                 showViewAll()
