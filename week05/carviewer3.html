@@ -128,7 +128,7 @@
             function doCreate(){
                 console.log("inside doCreate")
 
-                //part 15 
+                //part 15 Get car from the create form
                 var form = document.getElementById('createUpdateForm')
                 var car = {}
                 car.reg = form.querySelector('input[name="reg"]').value
@@ -144,7 +144,7 @@
                 clearForm()
 
                 // week05 Lab05.4 Do the ajax call to create car on the server here.
-                console.log("doing createCar now")
+                console.log("createCar on server now - ajax POST next line")
                 
                 // var car is one that has just been created.
                 console.log(JSON.stringify(car));
@@ -171,9 +171,6 @@
                 //part 12 to call function in part 11
                 showViewAll()
             }
-
-            
-
 
             function clearForm(){
                 //part 13 
@@ -254,10 +251,27 @@
             function doUpdate(){
                 //part 27 incorporate getCarFromForm and setCarInRow
                 var car = getCarFromForm();
-                var rowElement = document.getElementById(car.reg)
-                setCarInRow(rowElement, car)
+                var rowElement = document.getElementById(car.reg);
+                setCarInRow(rowElement, car); //table is being updated fine
 
                 // week05 Lab05.4 ajax PUT to server here.
+
+                console.log("updateCar on server now - ajax PUT next line")
+                console.log(JSON.stringify(car));
+                console.log(car);
+                $.ajax({ //same
+                    "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
+                    "method": "PUT",
+                    "data": JSON.stringify(car),
+                    "dataType": "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    "success": function(result){
+                        console.log(result);
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("error:"+status+" message:"+error);
+                    }
+                });
 
                 clearForm()
                 showViewAll()
