@@ -144,11 +144,36 @@
                 clearForm()
 
                 // week05 Lab05.4 Do the ajax call to create car on the server here.
+                console.log("doing createCar now")
                 
+                // var car is one that has just been created.
+                console.log(JSON.stringify(car));
+                $.ajax({
+                    "url": "http://127.0.0.1:5000/cars",
+                    "method": "POST",
+                    "data": JSON.stringify(car),
+                    "dataType": "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    "success": function(result){
+                        console.log(result);
+
+                        // warning from next line but goes to server ok so just comment it?
+                        // output was location on page in testgetall.html, we don't need it.
+                        // document.getElementById("output").innerText = JSON.stringify(result); 
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("error:"+status+" message:"+error);
+                    }
+
+                });
+
 
                 //part 12 to call function in part 11
                 showViewAll()
             }
+
+            
+
 
             function clearForm(){
                 //part 13 
@@ -246,6 +271,8 @@
 
                 //week05 Lab05.4 get car reg from row, call ajax with that reg to delete from server. 
             }
+
+            
 
         </script>
     </body>
