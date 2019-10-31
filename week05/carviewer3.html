@@ -1,5 +1,5 @@
-<!--Data Representation lab02-->
-<!--carviwer_wk2.html-->
+<!--Data Representation lab05.4-->
+<!--carviwer3.html-->
 
 <!DOCTYPE html>
 <html>
@@ -83,7 +83,7 @@
                 document.getElementById('doCreateButton').style.display="none"
                 document.getElementById('doUpdateButton').style.display="block"
                 
-                // to find the closed table row <tr> to button element
+                // to find the closest table row <tr> to button element
                 var rowElement = buttonElement.parentNode.parentNode
                 var car = getCarFromRow(rowElement)
                 populateFormWithCar(car)
@@ -255,7 +255,7 @@
                 setCarInRow(rowElement, car); //table is being updated fine
 
                 // week05 Lab05.4 ajax PUT to server here.
-
+                ////////////////////////////////////////////////////////////////
                 console.log("updateCar on server now - ajax PUT next line")
                 console.log(JSON.stringify(car));
                 console.log(car); //same
@@ -281,12 +281,64 @@
                 //part 29 delete specified row
                 var tableElement = document.getElementById('carTable')
                 var index = r.parentNode.parentNode.rowIndex;
-                tableElement.deleteRow(index);
+                console.log(index); //returns row number ok
 
-                //week05 Lab05.4 get car reg from row, call ajax with that reg to delete from server. 
+                //week05 Lab05.4 get car reg from row.
+                var rowElement = r.parentNode.parentNode; // got this to work not 100% sure why.
+                var car = getCarFromRow(rowElement); //get car
+                console.log(JSON.stringify(car)); //check ok
+
+                car.reg = rowElement.cells[0].firstChild.textContent; //get car.reg
+                console.log(car.reg); //check ok
+
+                tableElement.deleteRow(index); // delete row in table ok
+             
+                //week05 Lab05.4 got car reg from  above, now call ajax with that reg to delete from server. 
+                ////////////////////////////////////////////////////////////////
+                //deleteCar(car.reg); // would be better to pass reg to function.
+                console.log("deleteCar on server now - ajax DELETE next line")
+                console.log(JSON.stringify(car.reg)); //check again
+                $.ajax({
+                "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
+                "method": "DELETE",
+                "data": "",
+                "dataType": "JSON",
+                contentType: "application/json; charset=utf-8",
+                "success": function(result){
+                    console.log(result);
+                },
+                "error": function(xhr, status,error){
+                    console.log("error:"+status+" message:"+error);
+                }
+
+                });
+
+                
+
             }
 
-            
+            // AJAX functions below - not using yet.
+
+            function deleteCar(){
+                console.log("inside deleteCar fn")
+                //var car = {"reg":"12 D 1234"}
+                console.log(JSON.stringify(c));
+                $.ajax({
+                    "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
+                    "method": "DELETE",
+                    "data": "",
+                    "dataType": "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    "success": function(result){
+                        console.log(result);
+                        //document.getElementById("output").innerText = JSON.stringify(result);
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("error:"+status+" message:"+error);
+                    }
+
+                });
+            }
 
         </script>
     </body>
