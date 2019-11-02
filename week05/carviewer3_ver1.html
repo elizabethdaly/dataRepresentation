@@ -1,6 +1,5 @@
 <!--Data Representation lab05.4-->
 <!--carviwer3.html-->
-<!--put all ajax functions at end-->
 
 <!DOCTYPE html>
 <html>
@@ -89,10 +88,35 @@
                 var car = getCarFromRow(rowElement)
                 populateFormWithCar(car)
             }
-
             // week05 Lab05.4 Load data from server when program starts
             // cars are from restserver.py
-            getAll(); // call ajax getAll()
+            getAll(); // call getAll()
+            function getAll(){
+                console.log("inside getAll function")
+                $.ajax({
+                    "url": "http://127.0.0.1:5000/cars",
+                    "method": "GET",
+                    "data": "",
+                    "dataType": "JSON",
+                    "success": function(result){
+                        // print out all cars
+                        // console.log(JSON.stringify(result));
+                    
+                        // or loop through each car in cars
+                        for (car of result.cars){
+                            console.log(JSON.stringify(car));
+
+                            // put each car into the table
+                            addCarToTable(car)
+                        };
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("error:"+status+" message:"+error);
+                    }
+
+                });
+                
+            }
             
             function showViewAll(){
                 //part 11 show create button and table, hide createUpdateForm
@@ -121,8 +145,28 @@
 
                 // week05 Lab05.4 Do the ajax call to create car on the server here.
                 console.log("createCar on server now - ajax POST next line")
+                
                 // var car is one that has just been created.
-                createCar(car);
+                console.log(JSON.stringify(car));
+                $.ajax({
+                    "url": "http://127.0.0.1:5000/cars",
+                    "method": "POST",
+                    "data": JSON.stringify(car),
+                    "dataType": "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    "success": function(result){
+                        console.log(result);
+
+                        // warning from next line but goes to server ok so just comment it?
+                        // output was location on page in testgetall.html, we don't need it.
+                        // document.getElementById("output").innerText = JSON.stringify(result); 
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("error:"+status+" message:"+error);
+                    }
+
+                });
+
 
                 //part 12 to call function in part 11
                 showViewAll()
@@ -213,11 +257,21 @@
                 // week05 Lab05.4 ajax PUT to server here.
                 ////////////////////////////////////////////////////////////////
                 console.log("updateCar on server now - ajax PUT next line")
-                // var car is one that has just been created.
-                // do I pass car or car reg?
                 console.log(JSON.stringify(car));
-                var carReg = car.reg;
-                updateCar(car);
+                console.log(car); //same
+                $.ajax({
+                    "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
+                    "method": "PUT",
+                    "data": JSON.stringify(car),
+                    "dataType": "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    "success": function(result){
+                        console.log(result);
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("error:"+status+" message:"+error);
+                    }
+                });
 
                 clearForm()
                 showViewAll()
@@ -244,91 +298,6 @@
                 //deleteCar(car.reg); // would be better to pass reg to function.
                 console.log("deleteCar on server now - ajax DELETE next line")
                 console.log(JSON.stringify(car.reg)); //check again
-                deleteCar(car);
-
-            }
-
-            // AJAX functions below.
-            /////////////////////////////////////////////////////////////////////////
-
-            function getAll(){
-                console.log("inside ajax getAll function")
-                $.ajax({
-                    "url": "http://127.0.0.1:5000/cars",
-                    "method": "GET",
-                    "data": "",
-                    "dataType": "JSON",
-                    "success": function(result){
-                        // print out all cars
-                        // console.log(JSON.stringify(result));
-                    
-                        // or loop through each car in cars
-                        for (car of result.cars){
-                            console.log(JSON.stringify(car));
-
-                            // put each car into the table
-                            addCarToTable(car)
-                        };
-                    },
-                    "error": function(xhr, status,error){
-                        console.log("error:"+status+" message:"+error);
-                    }
-
-                });
-                
-            }
-
-            function createCar(car){
-            console.log("inside ajax createCar fn")
-            //var car = {"reg":"12 D 1234","make":"Fiat","model":"Punto","price":3000}
-            console.log(JSON.stringify(car));
-            $.ajax({
-                "url": "http://127.0.0.1:5000/cars",
-                "method": "POST",
-                "data": JSON.stringify(car),
-                "dataType": "JSON",
-                contentType: "application/json; charset=utf-8",
-                "success": function(result){
-                    console.log(result);
-                    // warning from next line but goes to server ok so just comment it?
-                    // output was location on page in testgetall.html, we don't need it.
-                    //document.getElementById("output").innerText = JSON.stringify(result); 
-                },
-                "error": function(xhr, status,error){
-                    console.log("error:"+status+" message:"+error);
-                    }
-
-                });
-            }
-
-            function updateCar(car){
-            console.log("inside updateCar fn")
-            //var car = {"reg":"181 G 1234","make":"Ford","model":"Mondeo","price":10}
-            console.log(JSON.stringify(car));
-            $.ajax({
-                "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
-                "method": "PUT",
-                "data": JSON.stringify(car),
-                "dataType": "JSON",
-                contentType: "application/json; charset=utf-8",
-                "success": function(result){
-                    console.log(result);
-                    // warning from next line but goes to server ok so just comment it?
-                    // output was location on page in testgetall.html, we don't need it.
-                    // document.getElementById("output").innerText = JSON.stringify(result);
-                },
-                "error": function(xhr, status,error){
-                    console.log("error:"+status+" message:"+error);
-                }
-
-            });
-        }
-
-            function deleteCar(car){
-                console.log("inside deleteCar fn")
-                //var car = {"reg":"12 D 1234"}
-                console.log(JSON.stringify(car));
-
                 $.ajax({
                 "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
                 "method": "DELETE",
@@ -342,7 +311,33 @@
                     console.log("error:"+status+" message:"+error);
                 }
 
-                });                
+                });
+
+                
+
+            }
+
+            // AJAX functions below - not using yet.
+
+            function deleteCar(){
+                console.log("inside deleteCar fn")
+                //var car = {"reg":"12 D 1234"}
+                console.log(JSON.stringify(c));
+                $.ajax({
+                    "url": "http://127.0.0.1:5000/cars/"+encodeURI(car.reg),
+                    "method": "DELETE",
+                    "data": "",
+                    "dataType": "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    "success": function(result){
+                        console.log(result);
+                        //document.getElementById("output").innerText = JSON.stringify(result);
+                    },
+                    "error": function(xhr, status,error){
+                        console.log("error:"+status+" message:"+error);
+                    }
+
+                });
             }
 
         </script>
