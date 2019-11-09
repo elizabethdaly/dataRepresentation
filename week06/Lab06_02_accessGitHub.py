@@ -23,8 +23,17 @@ filename = "repo.json"
 response = requests.get(url, auth=('token', apiKey))
 print(response.status_code) # should get 200
 
+## return content to cmd window
+# print(response.content) # return content to cmd window
+
+## return url of response
+print(response.url)
+
+# print(response.json()) # or send it to a file
 repoJSON = response.json()
 
-# Now send info to the file
+## Now send info to the file
 file = open(filename, "w")
 json.dump(repoJSON, file, indent=4)
+
+## Part 8 Make a change to a git account? my own?
