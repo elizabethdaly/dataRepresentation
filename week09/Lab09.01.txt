@@ -1,0 +1,11 @@
+52957 Data Representation\dataRepresentation\week09
+Lab 09.01 Databases
+
+1.c
+create database datarep;
+
+1.d
+use datarep;
+
+1.e
+
