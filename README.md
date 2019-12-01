@@ -17,3 +17,4 @@ This repository contains exercises and assessments for the module. Each week is 
 - week06: Consuming APIs with Python
 - week07: Consolidation & extra
 - week08: FLASK
+- week09: Databases
