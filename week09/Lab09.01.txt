@@ -8,4 +8,58 @@ create database datarep;
 use datarep;
 
 1.e
+create table student (
+id int NOT NULL auto_increment,
+firstname varchar(100),
+age int(3),
+PRIMARY KEY(id)
+);
 
+
+insert into student (firstname, age) values ('Joe', 56);
+insert into student (firstname, age) values ('Mary', 23);
+select * from student;
+
++----+-----------+------+
+| id | firstname | age  |
++----+-----------+------+
+|  1 | Joe       |   56 |
+|  2 | Mary      |   23 |
++----+-----------+------+
+
+update student set firstname='Edel' where id = 1;
+select * from student;
+
++----+-----------+------+
+| id | firstname | age  |
++----+-----------+------+
+|  1 | Edel      |   56 |
+|  2 | Mary      |   23 |
++----+-----------+------+
+
+delete from student where id = 1;
+select * from student;
+
++----+-----------+------+
+| id | firstname | age  |
++----+-----------+------+
+|  2 | Mary      |   23 |
++----+-----------+------+
+
+2. 
+create table book (
+id int NOT NULL auto_increment,
+title varchar(100),
+author varchar(100),
+price decimal(10,2),
+PRIMARY KEY(id)
+);
+
+select * from book;
++----+---------------------+-----------+-------+
+| id | title               | author    | price |
++----+---------------------+-----------+-------+
+|  1 | The Grapes of Wrath | Steinbeck | 10.50 |
+|  2 | The Handmaid's Tale | Atwood    |  7.99 |
+|  3 | Olive Kitteridge    | Strout    | 12.00 |
++----+---------------------+-----------+-------+
